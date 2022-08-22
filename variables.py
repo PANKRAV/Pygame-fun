@@ -33,4 +33,6 @@ ORANGE = (255, 165 ,0)
 
 
 
-#
+#FUNCTIONAL
+game_speed = 1
+g = 10
