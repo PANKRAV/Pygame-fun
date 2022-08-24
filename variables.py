@@ -1,5 +1,7 @@
 import pygame as pg
 from pygame.locals import *
+import pathlib
+
 
 #COLORS
 WHITE = (255, 255, 255 )
@@ -16,7 +18,9 @@ ORANGE = (255, 165 ,0)
 
 
 #LENGTHS
-
+height = 1000
+width = 1000
+ground_height = 100
 
 
 
@@ -28,7 +32,8 @@ ORANGE = (255, 165 ,0)
 
 
 #PATHS
-
+images = None
+sounds = None
 
 
 
@@ -36,3 +41,4 @@ ORANGE = (255, 165 ,0)
 #FUNCTIONAL
 game_speed = 1
 g = 10
+fps = 2400

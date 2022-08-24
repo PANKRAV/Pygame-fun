@@ -68,3 +68,16 @@ class Player:
 
     def draw(self, screen):
         pg.draw.rect(screen, self.color, self.rect)
+
+
+
+
+
+
+
+
+
+
+class State:
+    def __init__(self):
+        pass
