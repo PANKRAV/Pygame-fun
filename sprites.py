@@ -25,7 +25,8 @@ class Sprite:
 
 
 class Player:
-
+    height = 100
+    width = 50
     player_data = []
 
     def __init__(self, x, y) -> None:
@@ -62,7 +63,25 @@ class Player:
             "uy" : self.uy,
             "lifes" : self.lifes
         })
+
+
+    def update(self, screen):
+
+        if self.pressed["right"]:
+            pass
+
+        elif self.pressed["left"]:
+            pass
+
+        elif self.pressed["jump"]:
+            pass
+
+        else:
+            pass
+
         
+
+
 
 
 
