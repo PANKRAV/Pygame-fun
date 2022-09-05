@@ -3,6 +3,7 @@ from pygame.locals import *
 
 #user defined
 import variables as v
+v.dt : float
 
 
 
@@ -32,9 +33,9 @@ class Player:
     def __init__(self, x, y) -> None:
         self.width = 50
         self.height = 100
-        self.rect = pg.Rect(x, y, self.width, self.height)
         self.x = int(x)
         self.y = int(y)  
+        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.color = v.BLUE
         self.pressed = {
             "jump" : False,
@@ -46,6 +47,7 @@ class Player:
         self.jump = 1000
         self.mass = 350
         self.uy = 0
+        self.ux = 0
         self.isground = False
         self.lifes = 4
         #state for platform or ground
@@ -66,23 +68,32 @@ class Player:
 
 
     def update(self, screen):
+        self.ux = 0
 
         if self.pressed["right"]:
-            pass
+            self.ux = self.speed
 
         elif self.pressed["left"]:
-            pass
+            self.ux = - self.speed
 
         elif self.pressed["jump"]:
-            pass
+            self.uy = self.jump
 
         else:
             pass
 
+
+        if self.ux != 0:
+            if self.x <= 0 or self.x >= v.width - self.width:
+                self.x = 0
+            else:
+                self.x += self.ux * v.dt * v.game_speed
+
+
         
 
-
-
+        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
+        Player.draw(v.screen)
 
 
     def draw(self, screen):

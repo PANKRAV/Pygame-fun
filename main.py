@@ -27,8 +27,8 @@ pg.display.init()
 pg.display.set_caption("my game")
 
 
-screen = pg.display.set_mode((v.width, v.height), flags = pg.SHOWN)
-screen.fill(v.BLACK)
+v.screen : pg.Surface
+v.screen.fill(v.BLACK)
 
 
 player = sprites.Player(100, 1000 - v.ground_height - sprites.Player.height)
@@ -46,12 +46,12 @@ if __name__ == "__main__":
     while True:
         clock.tick(v.fps)
         now = time.time()
-        dt = now - start_time
+        v.dt = now - start_time
         start_time = time.time()
 
-        screen.fill((12, 24, 36))
+        v.screen.fill((12, 24, 36))
         #edafos
-        pg.draw.rect(screen, v.BROWN, (0, (v.height - v.ground_height), v.width, v.ground_height))
+        pg.draw.rect(v.screen, v.BROWN, (0, (v.height - v.ground_height), v.width, v.ground_height))
 
         for event in pg.event.get():
             if event.type == QUIT:
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
 
         player.update()
-        player.draw(screen)
+        player.draw(v.screen)
         pg.display.flip()
 
 

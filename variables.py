@@ -42,3 +42,5 @@ sounds = None
 game_speed = 1
 g = 10
 fps = 2400
+screen = pg.display.set_mode((width, height), flags = pg.SHOWN)
+dt = None
