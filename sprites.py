@@ -25,7 +25,7 @@ class Sprite:
 
 
 
-class Player:
+class Player(Sprite):
     height = 100
     width = 50
     player_data = []
@@ -48,6 +48,7 @@ class Player:
         self.mass = 350
         self.uy = 0
         self.ux = 0
+        self.uxmax = 2000
         self.isground = False
         #if isground = -1 self is in air
         #if isground = 0 self is on ground
@@ -143,6 +144,16 @@ class Player:
 
 
 
+class Platform:
+    pass
+
+
+class Enemy(Sprite):
+    pass
+
+
+class Projectile(Sprite):
+    pass
 
 
 class State:
