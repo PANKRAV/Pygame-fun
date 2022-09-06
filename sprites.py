@@ -43,12 +43,15 @@ class Player:
             "left" : False,
             "shoot" : False
         }
-        self.speed = 350
-        self.jump = 1000
+        self.speed = 600
+        self.jump = 1500
         self.mass = 350
         self.uy = 0
         self.ux = 0
         self.isground = False
+        #if isground = -1 self is in air
+        #if isground = 0 self is on ground
+        #if isground > 0 self is on a platform depending on number
         self.lifes = 4
         #state for platform or ground
         self.s = 0
@@ -69,31 +72,65 @@ class Player:
 
     def update(self, screen):
         self.ux = 0
+        
 
+        if self.pressed["jump"]:
+            self.isground = -1
+        elif int(self.y) >= (v.height - v.ground_height - self.height):
+            self.isground = 0
+        elif False:
+            pass#platform check
+        else:
+            self.isground = - 1
+
+
+#X-AXIS
         if self.pressed["right"]:
             self.ux = self.speed
 
         elif self.pressed["left"]:
             self.ux = - self.speed
+#STOP
 
-        elif self.pressed["jump"]:
-            self.uy = self.jump
+#Y-AXIS
+        if self.pressed["jump"]:
+            self.uy = - self.jump
+            self.pressed["jump"] = False
 
         else:
             pass
+#STOP
 
-
+#------UPDATE X---------->
         if self.ux != 0:
-            if self.x <= 0 or self.x >= v.width - self.width:
+            if self.x < 0:
                 self.x = 0
+            elif self.x > v.width - self.width:
+                self.x = v.width - self.width
             else:
                 self.x += self.ux * v.dt * v.game_speed
+#------------------------>
 
 
+#-------UPDATE Y---------->        
+        self.y += self.uy * v.dt * v.game_speed 
+
+        if self.isground == -1:        
+            self.uy += self.mass * v.g * v.dt * v.game_speed
+
+        elif self.isground == 0:
+            self.y = v.height - v.ground_height - self.height
+            self.uy = 0
+
+        else:
+            pass
+            self.uy = 0
+            #platform staff here
+            
         
-
+#-------------------------->
         self.rect = pg.Rect(self.x, self.y, self.width, self.height)
-        Player.draw(v.screen)
+        self.draw(screen)
 
 
     def draw(self, screen):

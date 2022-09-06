@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
             if event.type == KEYDOWN:
 
-                if event.key == K_SPACE or event.key == K_UP:
+                if (event.key == K_SPACE or event.key == K_UP ) and player.isground != -1:
                     player.pressed["jump"] = True
                 elif event.key == K_d or event.key == K_RIGHT:
                     player.pressed["right"] = True
@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
 
 
-        player.update()
+        player.update(v.screen)
         player.draw(v.screen)
         pg.display.flip()
 
