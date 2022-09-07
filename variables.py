@@ -45,3 +45,4 @@ fps = 2400
 screen = pg.display.set_mode((width, height), flags = pg.SHOWN)
 dt = None
 object_accelaretion = False
+ρ = 1 #air density constant

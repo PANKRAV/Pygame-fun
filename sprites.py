@@ -47,7 +47,9 @@ class Player(Sprite):
         self.jump = 1500
         self.mass = 350
         self.uy = 0
+        self.ay = 0
         self.ux = 0
+        self.ax = 0
         self.uxmax = 2000
         self.isground = False
         #if isground = -1 self is in air
@@ -73,6 +75,7 @@ class Player(Sprite):
 
     def update(self, screen):
         self.ux = 0
+        self.acceleration()
         
 
         if self.pressed["jump"]:
@@ -93,14 +96,6 @@ class Player(Sprite):
             self.ux = - self.speed
 #STOP
 
-#Y-AXIS
-        if self.pressed["jump"]:
-            self.uy = - self.jump
-            self.pressed["jump"] = False
-
-        else:
-            pass
-#STOP
 
 #------UPDATE X---------->
         if self.ux != 0:
@@ -111,6 +106,18 @@ class Player(Sprite):
             else:
                 self.x += self.ux * v.dt * v.game_speed
 #------------------------>
+
+
+
+
+#Y-AXIS
+        if self.pressed["jump"]:
+            self.uy = - self.jump
+            self.pressed["jump"] = False
+
+        else:
+            pass
+#STOP
 
 
 #-------UPDATE Y---------->        
@@ -134,6 +141,10 @@ class Player(Sprite):
         self.draw(screen)
 
 
+
+
+
+
     def draw(self, screen):
         pg.draw.rect(screen, self.color, self.rect)
 
@@ -142,10 +153,41 @@ class Player(Sprite):
 
 
 
+    def acceleration(self, platfrom = None):
+        self.ax = 0
+        self.ay = 0
 
+
+
+#X-AXIS    
+        self.ax += v.ρ * self.ux
+
+        if self.isground == 0:
+            if self.ux > 0:
+                self.ax += self.μ * self.mass
+            elif self.uy < 0:
+                self.ax -= self.μ * self.mass
+
+        elif self.isground > 0:
+            pass #platforms
+        
+#X-AXIS-END
+
+#Y-AXIS
+        if self.isground == -1:
+            self.ay += self.mass * v.g
+            self.ay += v.ρ * self.uy
+
+#Y-AXIS-END
 
 class Platform:
-    pass
+    def __init__(self, μ, width, height, num):
+        super(Platform, self).__init__()
+        self.μ = μ
+        self.width = width
+        self.height = height
+        self.num = num #indicate platform
+
 
 
 class Enemy(Sprite):
