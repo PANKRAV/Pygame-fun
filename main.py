@@ -66,6 +66,9 @@ if __name__ == "__main__":
                     player.pressed["right"] = True
                 elif event.key == K_a or event.key == K_LEFT:
                     player.pressed["left"] = True
+                if event.key == K_LSHIFT:
+                    #if player.pressed["left"] or player.pressed["right"]:
+                    player.pressed["sprint"] = True
 
 
             if event.type == KEYUP:
@@ -74,6 +77,8 @@ if __name__ == "__main__":
                     player.pressed["right"] = False
                 elif event.key == K_a or event.key == K_LEFT:
                     player.pressed["left"] = False
+                elif event.key == K_LSHIFT:
+                    player.pressed["sprint"] = False
 
 
 

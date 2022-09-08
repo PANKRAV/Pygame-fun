@@ -19,7 +19,7 @@ ORANGE = (255, 165 ,0)
 
 #LENGTHS
 height = 1000
-width = 1000
+width = 1200
 ground_height = 100
 
 
@@ -44,7 +44,7 @@ g = 10
 fps = 2400
 screen = pg.display.set_mode((width, height), flags = pg.SHOWN)
 dt = None
-object_accelaretion = False
+object_accelaretion = True
 friction = True
 air_res = True
 ρ = 1 #air density constant

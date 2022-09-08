@@ -44,7 +44,8 @@ class Player(Sprite):
             "jump" : False,
             "right" : False,
             "left" : False,
-            "shoot" : False
+            "shoot" : False,
+            "sprint" : False
         }
         self.speed = 600
         self.jump = 1500
@@ -55,6 +56,7 @@ class Player(Sprite):
         self.ax = 0
         self.uxmax = 2000
         self.terminal_u = 0
+        self.sprint = 200000
         self.isground = False
         #if isground = -1 self is in air
         #if isground = 0 self is on ground
@@ -63,7 +65,7 @@ class Player(Sprite):
         #state for platform or ground
         self.s = 0
         self.state = "vulnerable"
-        self.μ = 0.5
+        self.μ = 0.65
         
         Player.player_data.append({
             "width" : self.width,
@@ -170,12 +172,16 @@ class Player(Sprite):
 #X-AXIS    
         if v.air_res : self.ax -= v.ρ * self.ux
 
+            
         if v.friction:
             if self.isground == 0:
                 if self.ux > 0:
                     self.ax -= self.μ * self.mass
+                    if v.object_accelaretion and self.pressed["sprint"] and self.pressed["right"]: self.ax += self.sprint
+
                 elif self.ux < 0:
                     self.ax += self.μ * self.mass
+                    if v.object_accelaretion and self.pressed["sprint"] and self.pressed["left"]: self.ax -= self.sprint
 
             elif self.isground > 0:
                 pass #platforms
