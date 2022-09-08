@@ -45,4 +45,7 @@ fps = 2400
 screen = pg.display.set_mode((width, height), flags = pg.SHOWN)
 dt = None
 object_accelaretion = False
+friction = True
+air_res = True
 ρ = 1 #air density constant
+groundμ = 1 #ground friction

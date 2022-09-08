@@ -25,6 +25,9 @@ class Sprite:
 
 
 
+
+
+
 class Player(Sprite):
     height = 100
     width = 50
@@ -51,6 +54,7 @@ class Player(Sprite):
         self.ux = 0
         self.ax = 0
         self.uxmax = 2000
+        self.terminal_u = 0
         self.isground = False
         #if isground = -1 self is in air
         #if isground = 0 self is on ground
@@ -59,7 +63,7 @@ class Player(Sprite):
         #state for platform or ground
         self.s = 0
         self.state = "vulnerable"
-        self.μ = 0
+        self.μ = 0.5
         
         Player.player_data.append({
             "width" : self.width,
@@ -73,8 +77,11 @@ class Player(Sprite):
         })
 
 
+
+
     def update(self, screen):
-        self.ux = 0
+        if not (v.friction or v.air_res):
+            self.ux = 0
         self.acceleration()
         
 
@@ -98,6 +105,7 @@ class Player(Sprite):
 
 
 #------UPDATE X---------->
+        self.ux += self.ax * v.dt * v.game_speed
         if self.ux != 0:
             if self.x < 0:
                 self.x = 0
@@ -124,7 +132,7 @@ class Player(Sprite):
         self.y += self.uy * v.dt * v.game_speed 
 
         if self.isground == -1:        
-            self.uy += self.mass * v.g * v.dt * v.game_speed
+            self.uy += self.ay * v.dt * v.game_speed
 
         elif self.isground == 0:
             self.y = v.height - v.ground_height - self.height
@@ -160,25 +168,39 @@ class Player(Sprite):
 
 
 #X-AXIS    
-        self.ax += v.ρ * self.ux
+        if v.air_res : self.ax -= v.ρ * self.ux
 
-        if self.isground == 0:
-            if self.ux > 0:
-                self.ax += self.μ * self.mass
-            elif self.uy < 0:
-                self.ax -= self.μ * self.mass
+        if v.friction:
+            if self.isground == 0:
+                if self.ux > 0:
+                    self.ax -= self.μ * self.mass
+                elif self.ux < 0:
+                    self.ax += self.μ * self.mass
 
-        elif self.isground > 0:
-            pass #platforms
+            elif self.isground > 0:
+                pass #platforms
         
 #X-AXIS-END
 
 #Y-AXIS
         if self.isground == -1:
             self.ay += self.mass * v.g
-            self.ay += v.ρ * self.uy
+            if v.air_res : self.ay += v.ρ * self.uy
 
 #Y-AXIS-END
+
+
+
+class Enemy(Sprite):
+    pass
+
+
+class Projectile(Sprite):
+    pass
+
+
+
+
 
 class Platform:
     def __init__(self, μ, width, height, num):
@@ -190,12 +212,6 @@ class Platform:
 
 
 
-class Enemy(Sprite):
-    pass
-
-
-class Projectile(Sprite):
-    pass
 
 
 class State:
