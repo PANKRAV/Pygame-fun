@@ -17,11 +17,24 @@ projectile_data = ["projectile"]
 #super(Player, self).__init__()
 class Sprite:
 
-    def __init__(self,x ,y, shape, color) -> None:
+    def __init__(self, x : int , y : int , shape, color, height : int , width : int) -> None:
         self.x = x
         self.y = y
         self.shape = shape
         self.color = color
+        self.height = height
+        self.width = width
+        if self.shape == "rectangle" :
+            self.rect = pg.Rect(self.x, self.y, self.width, self.height)
+        elif self.shape == "square":
+            self.rect = pg.Rect(self.x, self.y, self.width, self.width)
+
+
+    def draw(self, screen):
+        if self.shape == "circle" :
+            pg.draw.circle(screen, self.color, (self.x, self.y), (self.height))
+        else:
+            pg.draw.rect(screen, self.color, self.rect)
 
 
 
@@ -34,8 +47,11 @@ class Player(Sprite):
     player_data = []
 
     def __init__(self, x, y) -> None:
+        super().__init__(int(x), int(y), "rect", v.BLUE, 100, 50)
+        #hitbox
         self.width = 50
         self.height = 100
+        #hitbox//
         self.x = int(x)
         self.y = int(y)  
         self.rect = pg.Rect(self.x, self.y, self.width, self.height)
@@ -198,7 +214,13 @@ class Player(Sprite):
 
 
 class Enemy(Sprite):
-    pass
+    def __init__(self, x, y, moving : bool):
+        super().__init__(x, y, "square", v.RED, 40, 40)
+        self.moving = moving
+
+        
+
+
 
 
 class Projectile(Sprite):

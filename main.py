@@ -34,6 +34,9 @@ v.screen.fill(v.BLACK)
 
 player = sprites.Player(100, 1000 - v.ground_height - sprites.Player.height)
 
+#enemies
+
+
 
 clock = pg.time.Clock()
 clock.tick(v.fps)

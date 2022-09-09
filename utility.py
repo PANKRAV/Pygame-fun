@@ -39,8 +39,30 @@ def collision(sprite1: sprites.Sprite, sprite2: sprites.Sprite) -> bool:
         assert isinstance(sprite2, sprites.Sprite)
 #---------------->
 
-    
-    if True:
+
+    x = sprite1.x < sprite2.x + sprite2.width and sprite1.x + sprite1.width > sprite2.x
+    y = sprite1.y < sprite2.y + sprite2.height and sprite1.y + sprite1.height > sprite2.y
+
+    if x and y:
+        print("true")
         return True
-    elif True:
-        return True
+    else:
+        print("false")
+        return False
+
+
+
+
+
+
+
+
+
+
+def linear_system(a, b, c, d ) -> tuple:
+    x = 0
+    y = 0
+
+    return x , y
+
+
