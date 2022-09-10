@@ -1,10 +1,10 @@
+import physics
 import pygame as pg
 from pygame.locals import *
 
 #user defined
 import variables as v
 v.dt : float
-import physics
 
 
 
@@ -30,7 +30,7 @@ class Sprite:
         elif self.shape == "square":
             self.rect = pg.Rect(self.x, self.y, self.width, self.width)
 
-        self.ux, self.uy, self.μ, self.mass, self.isground = None #to be assigned in some of the child classes
+        self.ux, self.uy, self.μ, self.mass, self.isground = None, None, None, None, None #to be assigned in some of the child classes
 
     def draw(self, screen):
         if self.shape == "circle" :
@@ -189,31 +189,30 @@ class Player(Sprite):
 
 
 
-#X-AXIS    
-        if v.air_res : self.ax -= v.ρ * self.ux
+        gravity = physics.Gravity(self)
+        friction = physics.Friction(self)
+        air_res = physics.Air_res(self)
+        acc = physics.Accelaretion.gather(v.acc_list)
+        self.ax = acc["accx"]
+        self.ay = acc["accy"]   
+
+        
 
             
-        if v.friction:
-            if self.isground == 0:
-                if self.ux > 0:
-                    self.ax -= self.μ * self.mass
-                    if v.object_accelaretion and self.pressed["sprint"] and self.pressed["right"]: self.ax += self.sprint
-
-                elif self.ux < 0:
-                    self.ax += self.μ * self.mass
-                    if v.object_accelaretion and self.pressed["sprint"] and self.pressed["left"]: self.ax -= self.sprint
-
-            elif self.isground > 0:
-                pass #platforms
         
-#X-AXIS-END
+        if self.isground == 0:
+            if self.ux > 0:
+                if v.object_accelaretion and self.pressed["sprint"] and self.pressed["right"]: 
+                     self.ax += self.sprint
 
-#Y-AXIS
-        if self.isground == -1:
-            self.ay += self.mass * v.g
-            if v.air_res : self.ay += v.ρ * self.uy
+            elif self.ux < 0:
+                if v.object_accelaretion and self.pressed["sprint"] and self.pressed["left"]: 
+                    self.ax -= self.sprint
 
-#Y-AXIS-END
+        
+
+
+
 
 
 

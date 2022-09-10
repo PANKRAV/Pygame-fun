@@ -1,14 +1,16 @@
+from __future__ import annotations
 import pygame as pg
 from pygame.locals import *
 import math
+from typing import TYPE_CHECKING
 
 
-
-import sprites
+if TYPE_CHECKING:
+    import sprites
 import variables as v
 
 
-acc_list = []
+v.acc_list = []
 
 
 class Force:
@@ -18,6 +20,7 @@ class Force:
 
 
 class Accelaretion:
+    
     def __init__(self, type : str, sprite : sprites.Sprite):
         self.type = type
         self.body = sprite
@@ -26,16 +29,16 @@ class Accelaretion:
 
 
     @staticmethod
-    def gather(acc : list = acc_list) -> dict:
-        accx, accy = 0
+    def gather(acc : list = v.acc_list) -> dict:
+        accx, accy = 0, 0
 
-        for item in acc_list:
+        for item in v.acc_list:
             item : Accelaretion
             if item.type == "x":
                 accx += item.value
 
             elif item.type == "y":
-                acc.y += item.value
+                accy += item.value
 
             elif item.type == "xy":
                 accx += item.value["x"]
@@ -43,6 +46,8 @@ class Accelaretion:
 
             else:
                 print("accelaretion type not assigned")
+        
+        v.acc_list = []
 
         return {"accx" : accx, "accy" : accy}
 
@@ -60,7 +65,7 @@ class Gravity(Accelaretion):
             self.value = 0
         
         if self.value != 0:
-            acc_list.append[self]
+            v.acc_list.append(self)
 
 
 
@@ -69,13 +74,21 @@ class Friction(Accelaretion):
         super().__init__("x", sprite)
 
         if v.friction:
-            if sprite.ux > 0 : 
-                self.value = - sprite.μ * sprite.mass
-            elif sprite.ux < 0 : 
-                self.value = sprite.μ * sprite.mass
-        
+            if sprite.isground == 0:
+                if sprite.ux > 0 : 
+                    self.value = - sprite.μ * sprite.mass
+                elif sprite.ux < 0 : 
+                    self.value = sprite.μ * sprite.mass
+
+            elif sprite.isground > 0:
+                pass #platform things
+
+            elif sprite.isground == None:
+                print("Bad Sprite")
+
+    
         if self.value != 0:
-            acc_list.append[self]
+            v.acc_list.append(self)
 
 
 
@@ -89,4 +102,4 @@ class Air_res(Accelaretion):
             self.value["y"] = - sprite.uy * v.ρ
 
         if self.value["x"] != 0 or self.value["y"] != 0:
-            acc_list.append[self]
+            v.acc_list.append(self)
