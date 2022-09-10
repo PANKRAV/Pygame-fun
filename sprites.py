@@ -207,7 +207,7 @@ class Player(Sprite):
 #Y-AXIS
         if self.isground == -1:
             self.ay += self.mass * v.g
-            if v.air_res : self.ay += v.ρ * self.uy
+            if v.air_res : self.ay -= v.ρ * self.uy
 
 #Y-AXIS-END
 
