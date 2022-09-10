@@ -32,7 +32,7 @@ class Accelaretion:
     def gather(acc : list = v.acc_list) -> dict:
         accx, accy = 0, 0
 
-        for item in v.acc_list:
+        for item in acc:
             item : Accelaretion
             if item.type == "x":
                 accx += item.value
@@ -76,9 +76,9 @@ class Friction(Accelaretion):
         if v.friction:
             if sprite.isground == 0:
                 if sprite.ux > 0 : 
-                    self.value = - sprite.μ * sprite.mass
+                    self.value = - v.groundμ * sprite.μ * sprite.mass
                 elif sprite.ux < 0 : 
-                    self.value = sprite.μ * sprite.mass
+                    self.value = v.groundμ * sprite.μ * sprite.mass
 
             elif sprite.isground > 0:
                 pass #platform things
