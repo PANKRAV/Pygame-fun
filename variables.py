@@ -42,10 +42,12 @@ sounds = None
 game_speed = 1
 g = 10
 fps = 2400
+acc_list = []
 screen = pg.display.set_mode((width, height), flags = pg.SHOWN)
 dt = None
+ρ = 1 #air density constant
+groundμ = 1 #ground friction
+#switches
 object_accelaretion = True
 friction = True
 air_res = True
-ρ = 1 #air density constant
-groundμ = 1 #ground friction
