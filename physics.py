@@ -76,9 +76,9 @@ class Friction(Accelaretion):
         if v.friction:
             if sprite.isground == 0:
                 if sprite.ux > 0 : 
-                    self.value = - v.groundμ * sprite.μ * sprite.mass
+                    self.value = - v.groundμ * sprite.μ * sprite.mass * v.g
                 elif sprite.ux < 0 : 
-                    self.value = v.groundμ * sprite.μ * sprite.mass
+                    self.value = v.groundμ * sprite.μ * sprite.mass * v.g
 
             elif sprite.isground > 0:
                 pass #platform things
