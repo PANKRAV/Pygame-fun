@@ -1,10 +1,13 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
 from aifc import Error
 import pygame as pg
 from pygame.locals import *
 import math
 
 #user defined
-import sprites
+if TYPE_CHECKING:
+    import sprites
 
 
 
