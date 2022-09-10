@@ -46,7 +46,7 @@ acc_list = []
 screen = pg.display.set_mode((width, height), flags = pg.SHOWN)
 dt = None
 ρ = 1 #air density constant
-groundμ = 1 #ground friction
+groundμ = 0.1 #ground friction
 #switches
 object_accelaretion = True
 friction = True
