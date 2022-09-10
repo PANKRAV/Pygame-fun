@@ -4,6 +4,7 @@ from pygame.locals import *
 #user defined
 import variables as v
 v.dt : float
+import physics
 
 
 
@@ -29,12 +30,15 @@ class Sprite:
         elif self.shape == "square":
             self.rect = pg.Rect(self.x, self.y, self.width, self.width)
 
+        self.ux, self.uy, self.μ, self.mass, self.isground = None #to be assigned in some of the child classes
 
     def draw(self, screen):
         if self.shape == "circle" :
             pg.draw.circle(screen, self.color, (self.x, self.y), (self.height))
         else:
             pg.draw.rect(screen, self.color, self.rect)
+
+
 
 
 
