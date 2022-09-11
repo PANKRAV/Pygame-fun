@@ -1,0 +1,70 @@
+{
+    "player" : 
+{
+        "x" : 0,
+        "y" : 0
+ },
+ "enemies" :
+ {
+    "ground" : 
+    {
+        "enemy1" : 
+        {
+            "x" : 0,
+            "y" : 0,
+            "color" : null,
+            "width" : 0,
+            "height" : 0,
+            "moving" : false
+        }
+    },
+    "air" :
+    {
+        "x" : 0,
+        "y" : 0,
+        "color" : null,
+        "width" : 0,
+        "height" : 0,
+        "moving" : false
+    },
+    "platform" :
+    {
+        "platfrom_num" : 0,
+        "color" : null,
+        "width" : 0,
+        "height" : 0,
+        "moving" : false
+    }
+
+ },
+ "terrain" :
+ {
+    "platform" :
+    {
+        "x" : 0,
+        "y" : 0,
+        "color" : null,
+        "width" : 0,
+        "height" : 0,
+        "moving" : false
+    },
+    "wall" :
+    {
+        "x" : 0,
+        "y" : 0,
+        "color" : null,
+        "width" : 0,
+        "height" : 0,
+        "sticky" : false
+    },
+    "slope" :
+    {
+        "x" : 0,
+        "y" : 0,
+        "color" : null,
+        "width" : 0,
+        "height" : 0,
+        "angle" : 0
+    }
+ }
+}
