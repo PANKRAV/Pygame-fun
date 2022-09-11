@@ -48,6 +48,6 @@ dt = None
 ρ = 1 #air density constant
 groundμ = 0.25 #ground friction
 #switches
-object_accelaretion = True
+object_acceleration = True
 friction = True
 air_res = True

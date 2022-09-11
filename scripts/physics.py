@@ -19,7 +19,7 @@ class Force:
 
 
 
-class Accelaretion:
+class Acceleration:
     
     def __init__(self, type : str, sprite : sprites.Sprite):
         self.type = type
@@ -33,7 +33,7 @@ class Accelaretion:
         accx, accy = 0, 0
 
         for item in acc:
-            item : Accelaretion
+            item : Acceleration
             if item.type == "x":
                 accx += item.value
 
@@ -45,7 +45,7 @@ class Accelaretion:
                 accy += item.value["y"]
 
             else:
-                print("accelaretion type not assigned")
+                print("Acceleration type not assigned")
         
         v.acc_list = []
 
@@ -53,7 +53,7 @@ class Accelaretion:
 
             
 
-class Generic(Accelaretion):
+class Generic(Acceleration):
     def __init__(self, sprite: sprites.Sprite, ax, ay):
         super().__init__("xy", sprite)
         self.value = {"x" : ax, "y" : ay}
@@ -63,7 +63,7 @@ class Generic(Accelaretion):
 
 
 
-class Gravity(Accelaretion):
+class Gravity(Acceleration):
     def __init__(self, sprite : sprites.Sprite):
         super().__init__("y", sprite)
 
@@ -77,7 +77,7 @@ class Gravity(Accelaretion):
 
 
 
-class Friction(Accelaretion):
+class Friction(Acceleration):
     def __init__(self, sprite : sprites.Sprite):
         super().__init__("x", sprite)
 
@@ -100,7 +100,7 @@ class Friction(Accelaretion):
 
 
 
-class Air_res(Accelaretion):
+class Air_res(Acceleration):
     def __init__(self, sprite : sprites.Sprite):
         super().__init__("xy", sprite)
         self.value = {"x" : 0, "y" : 0}

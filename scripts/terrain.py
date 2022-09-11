@@ -10,6 +10,7 @@ class Terrain:
         self.height = height
         self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.angle = angle
+        self.color = color
 
 
 

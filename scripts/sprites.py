@@ -189,7 +189,7 @@ class Player(Sprite):
         gravity = physics.Gravity(self)
         friction = physics.Friction(self)
         air_res = physics.Air_res(self)
-        acc = physics.Accelaretion.gather(v.acc_list)
+        acc = physics.Acceleration.gather(v.acc_list)
         self.ax = acc["accx"]
         self.ay = acc["accy"]   
 
@@ -199,11 +199,11 @@ class Player(Sprite):
         
         if self.isground == 0:
             if self.ux > 0:
-                if v.object_accelaretion and self.pressed["sprint"] and self.pressed["right"]: 
+                if v.object_acceleration and self.pressed["sprint"] and self.pressed["right"]: 
                      self.ax += self.sprint
 
             elif self.ux < 0:
-                if v.object_accelaretion and self.pressed["sprint"] and self.pressed["left"]: 
+                if v.object_acceleration and self.pressed["sprint"] and self.pressed["left"]: 
                     self.ax -= self.sprint
 
         
