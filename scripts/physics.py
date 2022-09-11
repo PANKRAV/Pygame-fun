@@ -53,8 +53,16 @@ class Accelaretion:
 
             
 
+class Generic(Accelaretion):
+    def __init__(self, sprite: sprites.Sprite, ax, ay):
+        super().__init__("xy", sprite)
+        self.value = {"x" : ax, "y" : ay}
 
-    
+        if self.value["x"] != 0 or self.value["y"] != 0:
+            v.acc_list.append(self)
+
+
+
 class Gravity(Accelaretion):
     def __init__(self, sprite : sprites.Sprite):
         super().__init__("y", sprite)
