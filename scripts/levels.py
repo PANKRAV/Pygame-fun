@@ -8,3 +8,15 @@ class Level:
         self.enemies = enemies
         self.goal = goal
         self.start = start
+
+
+
+
+
+
+    def setup(self):
+        pass
+
+
+    def end(self):
+        pass

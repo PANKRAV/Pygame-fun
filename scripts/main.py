@@ -11,6 +11,7 @@ import time
 import variables as v
 import sprites
 import utility as util
+import terrain as t
 
 
 

@@ -55,11 +55,8 @@ class Player(Sprite):
         #hitbox
         self.width = 50
         self.height = 100
-        #hitbox//
-        self.x = int(x)
-        self.y = int(y)  
+        #hitbox//  
         self.rect = pg.Rect(self.x, self.y, self.width, self.height)
-        self.color = v.BLUE
         self.pressed = {
             "jump" : False,
             "right" : False,
@@ -68,8 +65,8 @@ class Player(Sprite):
             "sprint" : False
         }
         self.speed = 600
-        self.jump = 1500
-        self.mass = 350
+        self.jump = 2500
+        self.mass = 600
         self.uy = 0
         self.ay = 0
         self.ux = 0
@@ -85,7 +82,7 @@ class Player(Sprite):
         #state for platform or ground
         self.s = 0
         self.state = "vulnerable"
-        self.μ = 0.65
+        self.μ = 0.45
         
         Player.player_data.append({
             "width" : self.width,
