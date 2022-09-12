@@ -1,3 +1,5 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import physics as physics
 import pygame as pg
 from pygame.locals import *
@@ -5,18 +7,18 @@ from pygame.locals import *
 #user defined
 import variables as v
 v.dt : float
+if TYPE_CHECKING:
+    import terrain
 
 
 
-#vars
-plat_data = []
-enemy_data = ["enemy"]
-projectile_data = ["projectile"]
+
 
 
 
 #super(Player, self).__init__()
 class Sprite:
+    sprite_count = 0
 
     def __init__(self, x : int , y : int , shape, color, height : int , width : int) -> None:
         self.x = x
@@ -30,7 +32,11 @@ class Sprite:
         elif self.shape == "square":
             self.rect = pg.Rect(self.x, self.y, self.width, self.width)
 
-        self.ux, self.uy, self.μ, self.mass, self.isground = None, None, None, None, None #to be assigned in some of the child classes
+        #to be assigned in some of the child classes
+        self.ux, self.uy, self.μ, self.mass, self.isground = None, None, None, None, None 
+
+        Sprite.sprite_count += 1
+
 
     def draw(self, screen):
         if self.shape == "circle" :
@@ -108,8 +114,8 @@ class Player(Sprite):
             self.isground = -1
         elif int(self.y) >= (v.height - v.ground_height - self.height):
             self.isground = 0
-        elif False:
-            pass#platform check
+        elif self.plat_check() :
+            self.plat_check()
         else:
             self.isground = - 1
 
@@ -210,13 +216,21 @@ class Player(Sprite):
 
 
 
+    def plat_check(self):
+        for plat in v.plat_data:
+            plat : terrain.Platform
+
 
 
 
 class Enemy(Sprite):
+    enemy_count = 0
+
     def __init__(self, x, y, moving : bool):
         super().__init__(x, y, "square", v.RED, 40, 40)
         self.moving = moving
+
+        Enemy.enemy_count += 1
 
         
 

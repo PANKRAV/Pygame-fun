@@ -35,6 +35,12 @@ ground_height = 100
 images = None
 sounds = None
 
+#DATA
+acc_list = []
+plat_data = []
+enemy_data = []
+wall_data = []
+sprite_data = []
 
 
 
@@ -42,7 +48,6 @@ sounds = None
 game_speed = 1
 g = 10
 fps = 2400
-acc_list = []
 screen = pg.display.set_mode((width, height), flags = pg.SHOWN)
 dt = None
 ρ = 1 #air density constant

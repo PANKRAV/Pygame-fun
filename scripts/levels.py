@@ -1,5 +1,7 @@
 import pygame as pg
 from pygame.locals import *
+import json
+from pathlib import Path
 
 
 class Level:
@@ -19,4 +21,9 @@ class Level:
 
 
     def end(self):
+        pass
+
+
+    @classmethod
+    def load(cls, _json : Path):
         pass
