@@ -109,6 +109,7 @@ class Player(Sprite):
 
         if not (v.friction or v.air_res):
             self.ux = 0
+            
         self.acceleration()
         
 
@@ -133,6 +134,10 @@ class Player(Sprite):
 
 #------UPDATE X---------->
         self.ux += self.ax * v.dt * v.game_speed
+
+        if self.ux < 10 and self.ux > - 10 : #may cause issues later with larger μ values
+            self.ux = 0
+
         if self.ux != 0:
             if self.x < 0:
                 self.x = 0

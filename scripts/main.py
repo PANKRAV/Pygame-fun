@@ -34,7 +34,7 @@ v.screen.fill(v.BLACK)
 
 
 player = sprites.Player(100, 1000 - v.ground_height - sprites.Player.height)
-platform1 = t.Platform(300, 600, 200, 25, v.RED, 2)
+platform1 = t.Platform(300, 600, 200, 25, v.RED, 0.6)
 #enemies
 
 
