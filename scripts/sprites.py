@@ -105,6 +105,8 @@ class Player(Sprite):
 
 
     def update(self, screen):
+        
+
         if not (v.friction or v.air_res):
             self.ux = 0
         self.acceleration()
@@ -115,7 +117,7 @@ class Player(Sprite):
         elif int(self.y) >= (v.height - v.ground_height - self.height):
             self.isground = 0
         elif self.plat_check() :
-            self.plat_check()
+            pass
         else:
             self.isground = - 1
 
@@ -163,8 +165,8 @@ class Player(Sprite):
             self.y = v.height - v.ground_height - self.height
             self.uy = 0
 
-        else:
-            pass
+        elif self.isground > 0:
+            self.y = v.plat_data[self.isground - 1].y - self.height
             self.uy = 0
             #platform staff here
             
@@ -219,6 +221,13 @@ class Player(Sprite):
     def plat_check(self):
         for plat in v.plat_data:
             plat : terrain.Platform
+            if self.uy >= 0 :
+ 
+                y = self.y - 20 >= plat.y - plat.height - self.height and self.y + self.height <= plat.y + 20
+                x = self.x + self.width >= plat.x and self.x <= plat.x + plat.width       
+                if x and y:
+                    self.isground = plat.num
+                    return True
 
 
 
@@ -244,13 +253,7 @@ class Projectile(Sprite):
 
 
 
-class Platform:
-    def __init__(self, μ, width, height, num):
-        super(Platform, self).__init__()
-        self.μ = μ
-        self.width = width
-        self.height = height
-        self.num = num #indicate platform
+
 
 
 

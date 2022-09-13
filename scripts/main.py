@@ -34,7 +34,7 @@ v.screen.fill(v.BLACK)
 
 
 player = sprites.Player(100, 1000 - v.ground_height - sprites.Player.height)
-platform1 = t.Platform(300, 600, 200, 25, v.RED)
+platform1 = t.Platform(300, 600, 200, 25, v.RED, 2)
 #enemies
 
 
@@ -86,8 +86,10 @@ if __name__ == "__main__":
 
 
 
+        player.plat_check()
         player.update(v.screen)
         player.draw(v.screen)
+        platform1.update(player)
         platform1.draw(v.screen)
         pg.display.flip()
 

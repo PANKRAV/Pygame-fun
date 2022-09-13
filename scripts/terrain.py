@@ -32,9 +32,10 @@ class Terrain:
 class Platform(Terrain):
     platform_count = 0
 
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, x, y, width, height, color, μ):
         super().__init__(x, y, width, height, 0, color)
         self.num = Platform.platform_count + 1
+        self.μ = μ 
 
         Platform.platform_count += 1
         v.plat_data.append(self)
@@ -42,7 +43,8 @@ class Platform(Terrain):
 
 
     def update(self, player : sprites.Player):
-        pass
+        if player.isground == self.num:
+            pass
 
 
 

@@ -82,6 +82,7 @@ class Friction(Acceleration):
         super().__init__("x", sprite)
 
         if v.friction:
+            
             if sprite.isground == 0:
                 if sprite.ux > 0 : 
                     self.value = - v.groundμ * sprite.μ * sprite.mass * v.g
@@ -89,7 +90,10 @@ class Friction(Acceleration):
                     self.value = v.groundμ * sprite.μ * sprite.mass * v.g
 
             elif sprite.isground > 0:
-                pass #platform things
+                if sprite.ux > 0 :
+                    self.value = - v.plat_data[sprite.isground - 1].μ * sprite.μ * sprite.mass *v.g
+                elif sprite.ux < 0 : 
+                    self.value = v.plat_data[sprite.isground - 1].μ * sprite.μ * sprite.mass *v.g
 
             elif sprite.isground == None:
                 print("Bad Sprite")
@@ -105,9 +109,13 @@ class Air_res(Acceleration):
         super().__init__("xy", sprite)
         self.value = {"x" : 0, "y" : 0}
 
+        
         if v.air_res:
-            self.value["x"] = - sprite.ux * v.ρ
-            self.value["y"] = - sprite.uy * v.ρ
+            if not (sprite.ux < 20 and sprite.ux > -20):
+                self.value["x"] = - sprite.ux * v.ρ
+            
+            if not (sprite.uy < 1 and sprite.uy > -1):
+                self.value["y"] = - sprite.uy * v.ρ
 
         if self.value["x"] != 0 or self.value["y"] != 0:
             v.acc_list.append(self)
