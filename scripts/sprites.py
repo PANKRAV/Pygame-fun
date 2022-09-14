@@ -6,6 +6,7 @@ from pygame.locals import *
 
 #user defined
 import variables as v
+import utility
 v.dt : float
 if TYPE_CHECKING:
     import terrain
@@ -109,7 +110,7 @@ class Player(Sprite):
 
         if not (v.friction or v.air_res):
             self.ux = 0
-            
+
         self.acceleration()
         
 
@@ -223,17 +224,45 @@ class Player(Sprite):
 
 
 
+
+
+
     def plat_check(self):
         for plat in v.plat_data:
             plat : terrain.Platform
+
+            if plat.iframes > 0 :
+                plat.iframes -= 1
+                if plat.iframes == 0:
+                    plat.solid = True
+                
+
+
             if self.uy >= 0 :
  
                 y = self.y - 20 >= plat.y - plat.height - self.height and self.y + self.height <= plat.y + 20
                 x = self.x + self.width >= plat.x and self.x <= plat.x + plat.width       
-                if x and y:
+                
+                if x and y :
                     self.isground = plat.num
                     return True
 
+                elif plat.solid :
+                    if utility.collision(self, plat) :
+                        self.ux = 0
+                        self.uy = 0
+                        plat.solid = False
+                        plat.iframes = v.fps / 8 
+
+
+            elif plat.solid and self.uy < 0 :
+                _collision = utility.collision(self, plat)
+                if _collision:
+                    self.ux = 0
+                    self.uy = 0
+                    plat.solid = False
+                    plat.iframes = v.fps / 8 #frames
+                    
 
 
 

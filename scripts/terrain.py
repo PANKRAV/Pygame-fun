@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 class Terrain:
     terrain_count = 0
 
-    def __init__(self, x, y, width, height, angle, color):
+    def __init__(self, x, y, width, height, angle, color, solid = False):
         self.x = x
         self.y = y
         self.width = width
@@ -32,10 +32,12 @@ class Terrain:
 class Platform(Terrain):
     platform_count = 0
 
-    def __init__(self, x, y, width, height, color, μ):
-        super().__init__(x, y, width, height, 0, color)
+    def __init__(self, x, y, width, height, color, μ, solid = False):
+        super().__init__(x, y, width, height, 0, color, solid)
         self.num = Platform.platform_count + 1
         self.μ = μ 
+        self.solid = solid
+        self.iframes = 0
 
         Platform.platform_count += 1
         v.plat_data.append(self)
@@ -61,8 +63,8 @@ class Moving_Platform(Platform):
 class Wall(Terrain):
     wall_count = 0
 
-    def __init__(self, x, y, width, height, color):
-        super().__init__(x, y, width, height, 90, color)
+    def __init__(self, x, y, width, height, color, solid = False):
+        super().__init__(x, y, width, height, 90, color, solid)
         self.num = Wall.wall_count + 1
 
         Wall.wall_count += 1
@@ -89,7 +91,7 @@ class Sticky_Wall(Wall):
 class Slope(Terrain):
     slope_count = 0
 
-    def __init__(self, x, y, width, height, angle, color):
-        super().__init__(x, y, width, height, angle, color)
+    def __init__(self, x, y, width, height, angle, color, solid = False):
+        super().__init__(x, y, width, height, angle, color, solid)
 
         Slope.slope_count += 1

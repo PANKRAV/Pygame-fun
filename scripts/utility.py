@@ -6,12 +6,13 @@ from pygame.locals import *
 import math
 
 #user defined
-if TYPE_CHECKING:
+if TYPE_CHECKING or True:
     import sprites
+    import terrain as t
 
 
 
-def collision(sprite1: sprites.Sprite, sprite2: sprites.Sprite) -> bool:
+def collision(sprite1: sprites.Sprite, sprite2: sprites.Sprite|t.Terrain) -> bool:
 
 
 #SPRITE1
@@ -38,8 +39,12 @@ def collision(sprite1: sprites.Sprite, sprite2: sprites.Sprite) -> bool:
 
     elif isinstance(sprite2, sprites.Projectile):
         sprite2 : sprites.Projectile
+
+    elif isinstance(sprite2, t.Terrain):
+        sprite2 : t.Terrain
+
     else:
-        assert isinstance(sprite2, sprites.Sprite)
+        assert isinstance(sprite2, sprites.Sprite) or isinstance(sprite2, t.Terrain)
 #---------------->
 
 
@@ -47,10 +52,10 @@ def collision(sprite1: sprites.Sprite, sprite2: sprites.Sprite) -> bool:
     y = sprite1.y < sprite2.y + sprite2.height and sprite1.y + sprite1.height > sprite2.y
 
     if x and y:
-        print("true")
+
         return True
     else:
-        print("false")
+
         return False
 
 
