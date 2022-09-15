@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 import physics as physics
 import pygame as pg
 from pygame.locals import *
+import sys
 
 #user defined
 import variables as v
@@ -63,6 +64,8 @@ class Player(Sprite):
         self.width = 50
         self.height = 100
         #hitbox//  
+        self.x0 = self.x
+        self.y0 = self.y
         self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.pressed = {
             "jump" : False,
@@ -90,6 +93,7 @@ class Player(Sprite):
         self.s = 0
         self.state = "vulnerable"
         self.μ = 0.45
+        self.plat_relative = [False, "no"]
         
         Player.player_data.append({
             "width" : self.width,
@@ -106,6 +110,8 @@ class Player(Sprite):
 
 
     def update(self, screen):
+        self.x0 = self.x
+        self.y0 = self.y
         
 
         if not (v.friction or v.air_res):
@@ -174,10 +180,11 @@ class Player(Sprite):
         elif self.isground > 0:
             self.y = v.plat_data[self.isground - 1].y - self.height
             self.uy = 0
-            #platform staff here
+            
             
         
 #-------------------------->
+        self.plat_check()
         self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.draw(screen)
 
@@ -230,38 +237,42 @@ class Player(Sprite):
     def plat_check(self):
         for plat in v.plat_data:
             plat : terrain.Platform
-
-            if plat.iframes > 0 :
-                plat.iframes -= 1
-                if plat.iframes == 0:
-                    plat.solid = True
+            _col = utility.collision(self, plat)
+            
                 
 
-
+            
             if self.uy >= 0 :
- 
-                y = self.y - 20 >= plat.y - plat.height - self.height and self.y + self.height <= plat.y + 20
+                
+                y = self.y + self.height >= plat.y -20  and self.y + self.height <= plat.y + 20
                 x = self.x + self.width >= plat.x and self.x <= plat.x + plat.width       
                 
                 if x and y :
                     self.isground = plat.num
                     return True
 
-                elif plat.solid :
-                    if utility.collision(self, plat) :
-                        self.ux = 0
-                        self.uy = 0
-                        plat.solid = False
-                        plat.iframes = v.fps / 8 
+                elif plat.solid and _col :
+                    if self.y < plat.y + plat.height:
+                        if self.ux > 0:
+                            self.x = self.x0 - 1
+                        elif self.ux < 0 :
+                            self.x = self.x0 + 1
 
+                            
+                
+            elif plat.solid and _col :
+                if self.y < plat.y + plat.height - 2:
+                    if self.ux > 0:
+                        self.x = self.x0 - 1
+                    elif self.ux < 0 :
+                        self.x = self.x0 + 1
 
-            elif plat.solid and self.uy < 0 :
-                _collision = utility.collision(self, plat)
-                if _collision:
-                    self.ux = 0
+                if self.uy < 0 :
                     self.uy = 0
-                    plat.solid = False
-                    plat.iframes = v.fps / 8 #frames
+                    self.y = self.y0 + 1
+
+
+                            
                     
 
 

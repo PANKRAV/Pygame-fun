@@ -4,11 +4,17 @@ from aifc import Error
 import pygame as pg
 from pygame.locals import *
 import math
+import sys
 
 #user defined
 if TYPE_CHECKING or True:
     import sprites
     import terrain as t
+
+def q():
+    pg.quit()
+    sys.exit()
+
 
 
 
@@ -49,7 +55,7 @@ def collision(sprite1: sprites.Sprite, sprite2: sprites.Sprite|t.Terrain) -> boo
 
 
     x = sprite1.x < sprite2.x + sprite2.width and sprite1.x + sprite1.width > sprite2.x
-    y = sprite1.y < sprite2.y + sprite2.height and sprite1.y + sprite1.height > sprite2.y
+    y = sprite1.y <= sprite2.y + sprite2.height and sprite1.y + sprite1.height >= sprite2.y
 
     if x and y:
 
