@@ -244,7 +244,7 @@ class Player(Sprite):
             
             if self.uy >= 0 :
                 
-                y = self.y + self.height >= plat.y -20  and self.y + self.height <= plat.y + 20
+                y = self.y + self.height >= plat.y  and self.y + self.height <= plat.y + 5
                 x = self.x + self.width >= plat.x and self.x <= plat.x + plat.width       
                 
                 if x and y :
