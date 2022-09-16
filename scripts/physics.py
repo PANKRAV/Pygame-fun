@@ -54,7 +54,7 @@ class Acceleration:
             
 
 class Generic(Acceleration):
-    def __init__(self, sprite: sprites.Sprite, ax, ay):
+    def __init__(self, sprite: sprites.Sprite, ax = 0, ay = 0):
         super().__init__("xy", sprite)
         self.value = {"x" : ax, "y" : ay}
 

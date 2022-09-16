@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+from numpy import isin
 import physics as physics
 import pygame as pg
 from pygame.locals import *
@@ -9,8 +10,8 @@ import sys
 import variables as v
 import utility
 v.dt : float
-if TYPE_CHECKING:
-    import terrain
+
+import terrain
 
 
 
@@ -210,9 +211,19 @@ class Player(Sprite):
         gravity = physics.Gravity(self)
         friction = physics.Friction(self)
         air_res = physics.Air_res(self)
+
+        if self.isground > 0 :
+            if isinstance(v.plat_data[self.isground - 1], terrain.Moving_Platform) :
+
+                plat : terrain.Moving_Platform = v.plat_data[self.isground - 1] 
+                if plat.follow_player :  
+                    #it adds the plat accelleration every frame
+                    pass
+                    #plat_acc = physics.Generic(self, (plat.u["ux"] - plat.ux0)/(v.dt * v.game_speed), plat.u["uy"]/(v.dt * v.game_speed))
         acc = physics.Acceleration.gather(v.acc_list)
+
         self.ax = acc["accx"]
-        self.ay = acc["accy"]   
+        self.ay = acc["accy"]
 
         
 
@@ -272,7 +283,9 @@ class Player(Sprite):
                     self.y = self.y0 + 1
 
 
-                            
+
+    def life_check(self):
+        pass                            
                     
 
 
