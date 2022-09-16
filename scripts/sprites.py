@@ -138,6 +138,7 @@ class Player(Sprite):
                 plat : terrain.Moving_Platform = v.plat_data[self.isground - 1] 
                 if plat.follow_player :  
                     self.x += plat.u["ux"] * v.dt * v.game_speed
+                    self.y += plat.u["ux"] * v.dt * v.game_speed
 #X-AXIS
         if self.pressed["right"]:
             self.ux = self.speed
@@ -256,7 +257,7 @@ class Player(Sprite):
             
             if self.uy >= 0 :
                 
-                y = self.y + self.height >= plat.y  and self.y + self.height <= plat.y + 5
+                y = self.y + self.height >= plat.y - 2  and self.y + self.height <= plat.y + 5
                 x = self.x + self.width >= plat.x and self.x <= plat.x + plat.width       
                 
                 if x and y :
