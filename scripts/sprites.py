@@ -161,6 +161,11 @@ class Player(Sprite):
                 self.x = v.width - self.width
             else:
                 self.x += self.ux * v.dt * v.game_speed
+        
+        if self.x < 0 :
+            self.x = 0
+        elif self.x > v.width - self.width :
+            self.x = v.width - self.width
 #------------------------>
 
 

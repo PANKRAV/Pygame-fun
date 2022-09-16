@@ -1,5 +1,6 @@
 import pygame as pg
 from pygame.locals import *
+import pygame_gui
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import sys
@@ -50,6 +51,7 @@ start_time = time.time()
 
 if __name__ == "__main__":
     while True:
+        mouse = pg.mouse.get_pos()
         clock.tick(v.fps)
         now = time.time()
         v.dt = now - start_time
