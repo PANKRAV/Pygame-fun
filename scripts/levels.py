@@ -10,6 +10,7 @@ class Level:
         self.enemies = enemies
         self.goal = goal
         self.start = start
+        self.num = 0
 
 
 
@@ -26,4 +27,9 @@ class Level:
 
     @classmethod
     def load(cls, _json : Path):
+        pass
+
+
+
+    def json_pack(self, name : str):
         pass
