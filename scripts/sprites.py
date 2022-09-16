@@ -131,6 +131,18 @@ class Player(Sprite):
             self.isground = - 1
 
 
+
+        if self.isground > 0 :
+            if isinstance(v.plat_data[self.isground - 1], terrain.Moving_Platform) :
+
+                plat : terrain.Moving_Platform = v.plat_data[self.isground - 1] 
+                if plat.follow_player :  
+                    if plat.u["ux"] > 0 :
+                        if self.ux < plat.u["ux"] :
+                            self.ux = plat.u["ux"]
+                    else:
+                        if self.ux > plat.u["ux"] :
+                            self.ux = plat.u["ux"]
 #X-AXIS
         if self.pressed["right"]:
             self.ux = self.speed
@@ -212,14 +224,6 @@ class Player(Sprite):
         friction = physics.Friction(self)
         air_res = physics.Air_res(self)
 
-        if self.isground > 0 :
-            if isinstance(v.plat_data[self.isground - 1], terrain.Moving_Platform) :
-
-                plat : terrain.Moving_Platform = v.plat_data[self.isground - 1] 
-                if plat.follow_player :  
-                    #it adds the plat accelleration every frame
-                    pass
-                    #plat_acc = physics.Generic(self, (plat.u["ux"] - plat.ux0)/(v.dt * v.game_speed), plat.u["uy"]/(v.dt * v.game_speed))
         acc = physics.Acceleration.gather(v.acc_list)
 
         self.ax = acc["accx"]
