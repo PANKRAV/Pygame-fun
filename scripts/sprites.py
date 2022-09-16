@@ -137,12 +137,7 @@ class Player(Sprite):
 
                 plat : terrain.Moving_Platform = v.plat_data[self.isground - 1] 
                 if plat.follow_player :  
-                    if plat.u["ux"] > 0 :
-                        if self.ux < plat.u["ux"] :
-                            self.ux = plat.u["ux"]
-                    else:
-                        if self.ux > plat.u["ux"] :
-                            self.ux = plat.u["ux"]
+                    self.x += plat.u["ux"] * v.dt * v.game_speed
 #X-AXIS
         if self.pressed["right"]:
             self.ux = self.speed
