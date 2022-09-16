@@ -234,16 +234,18 @@ class Player(Sprite):
             
         
         if self.isground == 0:
+        
             if self.ux > 0:
                 if v.object_acceleration and self.pressed["sprint"] and self.pressed["right"]: 
-                     self.ax += self.sprint
+                    self.ax += self.sprint
 
             elif self.ux < 0:
                 if v.object_acceleration and self.pressed["sprint"] and self.pressed["left"]: 
                     self.ax -= self.sprint
 
         
-
+        
+        
 
 
 
