@@ -67,7 +67,6 @@ class Player(Sprite):
         #hitbox//  
         self.x0 = self.x
         self.y0 = self.y
-        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.pressed = {
             "jump" : False,
             "right" : False,
@@ -108,7 +107,20 @@ class Player(Sprite):
         })
 
 
+    @property
+    def rect(self) :
+        return pg.Rect(self.x, self.y, self.width, self.height)
 
+
+
+
+    @rect.setter
+    def rect(self, rect : pg.Rect) :
+        self.x = rect.left
+        self.y = rect.top
+        self.width = rect.width
+        self.height = rect.height
+        
 
     def update(self, screen):
         self.x0 = self.x
@@ -199,7 +211,7 @@ class Player(Sprite):
         
 #-------------------------->
         self.plat_check()
-        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
+        #self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.draw(screen)
 
 
@@ -306,7 +318,19 @@ class Enemy(Sprite) :
 
         Enemy.enemy_count += 1
 
+    @property
+    def rect(self) :
+        return pg.Rect(self.x, self.y, self.width, self.height)
 
+
+
+
+    @rect.setter
+    def rect(self, rect : pg.Rect) :
+        self.x = rect.left
+        self.y = rect.top
+        self.width = rect.width
+        self.height = rect.height
 
     def update(self):
         pass

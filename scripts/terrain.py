@@ -18,13 +18,26 @@ class Terrain:
         self.y = y
         self.width = width
         self.height = height
-        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.angle = angle
         self.color = color
         self.rounded = rounded
 
         Terrain.terrain_count += 1
 
+
+    @property
+    def rect(self) :
+        return pg.Rect(self.x, self.y, self.width, self.height)
+
+
+
+
+    @rect.setter
+    def rect(self, rect : pg.Rect) :
+        self.x = rect.left
+        self.y = rect.top
+        self.width = rect.width
+        self.height = rect.height
 
 
 
@@ -163,7 +176,7 @@ class Moving_Platform(Platform):
             
 
         
-        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
+        #self.rect = pg.Rect(self.x, self.y, self.width, self.height)
 
 
 
