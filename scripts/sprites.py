@@ -304,7 +304,29 @@ class Player(Sprite):
 
 
     def life_check(self):
-        pass                            
+        for enemy in v.enemy_data :
+            _col = utility.collision(self, enemy)
+            if _col :
+                self.lifes -= 1
+
+        for projectile in v.projectile_data :
+            _col = utility.collision(self, projectile)
+            if _col :
+                self.lifes -= 1
+
+
+        if self.lifes == 0 :
+            pass
+
+
+
+
+    def life_draw(self, screen = v.screen) :
+        _ = 0
+        for i in range(self.lifes) :
+            pg.draw.circle(screen, v.RED, (v.width/20 + _, v.height - 40 ), 20)
+            _ += 50
+                               
                     
 
 

@@ -40,6 +40,7 @@ sounds = None
 acc_list = []
 plat_data = []
 enemy_data = []
+projectile_data = []
 wall_data = []
 sprite_data = []
 mouse = ()

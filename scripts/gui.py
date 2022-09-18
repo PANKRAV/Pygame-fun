@@ -110,5 +110,16 @@ class Text :
 
 
 class Menu :
-    def __init__(self) -> None:
-        pass
+    def __init__(self, buttons : list, trigger : pg.key) -> None:
+        self.buttons = buttons
+        self.trigger = trigger
+        self.status = False
+
+
+
+
+
+    def setup(self) :
+        if self.status :
+            while True :
+                pass

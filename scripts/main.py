@@ -106,6 +106,8 @@ if __name__ == "__main__":
         player.plat_check()
         player.update(v.screen)
         player.draw(v.screen)
+        player.life_check()
+        player.life_draw(v.screen)
         platform1.update(player)
         platform1.draw(v.screen)
         platform2.update(player)
