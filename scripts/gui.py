@@ -15,8 +15,7 @@ class Button :
         self.x = x
         self.y = y
         self.width = width
-        self.height = height
-        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
+        self.height = height       
         self.color = color
         self.old_color = color
         self.action = action
@@ -26,6 +25,21 @@ class Button :
         self.pressed = False
         self.hasfocus = False
         
+
+    @property
+    def rect(self) :
+        return pg.Rect(self.x, self.y, self.width, self.height)
+
+
+
+
+    @rect.setter
+    def rect(self, rect : pg.Rect) :
+        self.x = rect.left
+        self.y = rect.top
+        self.width = rect.width
+        self.height = rect.height
+
 
 
 
