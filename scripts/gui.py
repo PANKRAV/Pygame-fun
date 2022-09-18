@@ -83,8 +83,10 @@ class Button :
 
 
 class Text :
-    def __init__(self) :
-        pass
+    def __init__(self, txt, pos : tuple, bg = v.screen_color) :
+        self.txt = txt
+        self.pos = pos
+        self.bg = bg
 
 
 

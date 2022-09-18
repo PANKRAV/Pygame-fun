@@ -30,7 +30,7 @@ pg.display.set_caption("my game")
 
 
 v.screen : pg.Surface
-v.screen.fill(v.BLACK)
+v.screen.fill(v.screen_color)
 
 
 player = sprites.Player(100, 1000 - v.ground_height - sprites.Player.height)

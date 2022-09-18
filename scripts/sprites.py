@@ -297,18 +297,42 @@ class Player(Sprite):
 
 
 
-class Enemy(Sprite):
+class Enemy(Sprite) :
     enemy_count = 0
 
-    def __init__(self, x, y, moving : bool):
-        super().__init__(x, y, "square", v.RED, 40, 40)
-        self.moving = moving
+    def __init__(self, pos : tuple|terrain.Platform):
+        super().__init__(pos[0], pos[1], "square", v.RED, 40, 40)
+        
 
         Enemy.enemy_count += 1
 
+
+
+    def update(self):
+        pass
+
         
 
+class Moving_Enemy(Enemy) :
+    moving_enemy_count = 0
 
+    def __init__(self, pos : tuple|terrain.Platform, u):
+        super().__init__(pos)
+        self.u = u
+
+
+        Moving_Enemy.moving_enemy_count += 1
+
+
+
+    def update(self) :
+        super().update()
+
+        self.x += self.u * v.dt * v.game_speed
+
+        
+        if self.x <= 0 or self.x + self.width >= v.width :
+            self.u = - self.u
 
 
 class Projectile(Sprite):

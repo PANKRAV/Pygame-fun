@@ -14,6 +14,7 @@ CYAN = (173, 216, 230)
 LIGHT_BLACK = (25, 25, 25)
 YELLOW = (255, 255, 224)
 ORANGE = (255, 165 ,0) 
+screen_color = BLACK
 
 
 
