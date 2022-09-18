@@ -39,7 +39,7 @@ platform2 = t.Platform(700, 600, 200, 25, v.GREEN, 0.6)
 platform3 = t.Moving_Platform(800, 200, 200, 70, v.BLUE, 0.8, 200, 0, 400, 0)
 platform4 = t.Moving_Platform(200, 100, 200, 70, v.ORANGE, 0.7, 100, 0, 200, 0, player_required = True   )
 #enemies
-button = gui.Button(100, 100, 100, 100, v.BLUE, gui.Button.action1)
+button = gui.Button(0, 0, 40, 40, v.RED, gui.Button.action1, 0)
 
 
 

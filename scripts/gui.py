@@ -11,18 +11,21 @@ pressed = False
 
 class Button :
 
-    def __init__(self, x, y, width, height, color, action, text : str = "", rounded = 0):
+    def __init__(self, x, y, width, height, color, action, focusaction, text : str = "", rounded = 0):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.rect = pg.Rect(self.x, self.y, self.width, self.height)
         self.color = color
+        self.old_color = color
         self.action = action
+        self.focusactionnum = focusaction
         self.text = text
         self.rounded = rounded
         self.pressed = False
         self.hasfocus = False
+        
 
 
 
@@ -46,11 +49,12 @@ class Button :
             
             else:
                 self.hasfocus = False
+                self.focusaction(self.focusactionnum)
 
 
 
         if self.hasfocus:
-            pass
+            self.focusaction(self.focusactionnum)
 
 
 
@@ -59,6 +63,20 @@ class Button :
     @staticmethod
     def action1():
         util.q()
+
+
+
+   
+    def focusaction(self, action = 0):
+        if action == 0 :
+            if self.hasfocus :
+                self.color = v.ORANGE
+
+            else :
+                self.color = self.old_color
+            
+            
+
 
 
 

@@ -5,11 +5,12 @@ from pathlib import Path
 
 
 class Level:
-    def __init__(self, platforms : list, enemies : list, goal : list, start : tuple):
+    def __init__(self, platforms : list, enemies : list, goal : list, buttons : list, start : tuple):
         self.platfroms = platforms
         self.enemies = enemies
         self.goal = goal
         self.start = start
+        self.buttons = buttons
         self.num = 0
 
 
