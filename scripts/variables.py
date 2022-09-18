@@ -41,6 +41,7 @@ plat_data = []
 enemy_data = []
 wall_data = []
 sprite_data = []
+mouse = ()
 
 
 

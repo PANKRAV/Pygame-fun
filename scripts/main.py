@@ -13,6 +13,7 @@ import variables as v
 import sprites
 import utility as util
 import terrain as t
+import gui
 
 
 
@@ -38,6 +39,7 @@ platform2 = t.Platform(700, 600, 200, 25, v.GREEN, 0.6)
 platform3 = t.Moving_Platform(800, 200, 200, 70, v.BLUE, 0.8, 200, 0, 400, 0)
 platform4 = t.Moving_Platform(200, 100, 200, 70, v.ORANGE, 0.7, 100, 0, 200, 0, player_required = True   )
 #enemies
+button = gui.Button(100, 100, 100, 100, v.BLUE, gui.Button.action1)
 
 
 
@@ -51,7 +53,7 @@ start_time = time.time()
 
 if __name__ == "__main__":
     while True:
-        mouse = pg.mouse.get_pos()
+        v.mouse = pg.mouse.get_pos()
         clock.tick(v.fps)
         now = time.time()
         v.dt = now - start_time
@@ -73,9 +75,10 @@ if __name__ == "__main__":
                     player.pressed["right"] = True
                 elif event.key == K_a or event.key == K_LEFT:
                     player.pressed["left"] = True
-                if event.key == K_LSHIFT:
+                elif event.key == K_LSHIFT:
                     #if player.pressed["left"] or player.pressed["right"]:
                     player.pressed["sprint"] = True
+                
 
 
             if event.type == KEYUP:
@@ -86,6 +89,17 @@ if __name__ == "__main__":
                     player.pressed["left"] = False
                 elif event.key == K_LSHIFT:
                     player.pressed["sprint"] = False
+
+
+
+            if event.type == pg.MOUSEBUTTONDOWN and pg.mouse.get_pressed()[0]:
+                left_click = True
+
+            if event.type == pg.MOUSEBUTTONUP and left_click:
+                    gui.pressed = True
+                    left_click = False
+
+            
 
 
 
@@ -100,6 +114,9 @@ if __name__ == "__main__":
         platform3.draw(v.screen)
         platform4.update(player)
         platform4.draw(v.screen)
+        button.update()
+        button.draw(v.screen)
+
 
         pg.display.flip()
 
