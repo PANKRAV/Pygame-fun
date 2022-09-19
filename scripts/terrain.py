@@ -70,6 +70,13 @@ class Platform(Terrain):
 
 
 
+class Bouncer(Platform) :
+    def __init__(self, x, y, width, height, color = v.GREEN, μ = 0, solid = True, rounded = 0):
+        super().__init__(x, y, width, height, color, μ, solid, rounded = width//2)
+
+
+
+
 
 class Moving_Platform(Platform):
     def __init__(self, x, y, width, height, color, μ, ux = 0, uy = 0, travelx = 0, travely = 0, solid = False, rounded = 0, player_required : bool = False, follow_player = True):
@@ -218,3 +225,12 @@ class Slope(Terrain):
         super().__init__(x, y, width, height, angle, color, solid)
 
         Slope.slope_count += 1
+
+
+
+
+
+
+
+class Goal:
+    ...
