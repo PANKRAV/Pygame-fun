@@ -7,6 +7,7 @@ import sys
 import numpy
 import random
 import time
+import asyncio
 
 #user defined
 import variables as v
@@ -39,6 +40,7 @@ platform2 = t.Platform(700, 600, 200, 25, v.GREEN, 0.6)
 platform3 = t.Moving_Platform(800, 200, 200, 70, v.BLUE, 0.8, 200, 0, 400, 0)
 platform4 = t.Moving_Platform(200, 100, 200, 70, v.ORANGE, 0.7, 100, 0, 200, 0, player_required = True   )
 #enemies
+enemy1 = sprites.Moving_Enemy((0, v.height - v.ground_height - sprites.Enemy.height), 30)
 button = gui.Button(0, 0, 40, 40, v.RED, gui.Button.action1, 0)
 
 
@@ -64,10 +66,13 @@ if __name__ == "__main__":
         pg.draw.rect(v.screen, v.BROWN, (0, (v.height - v.ground_height), v.width, v.ground_height))
 
         for event in pg.event.get():
+            event : pg.event
+
             if event.type == QUIT:
                 util.q()
 
             if event.type == KEYDOWN:
+                
 
                 if (event.key == K_SPACE or event.key == K_UP ) and player.isground != -1:
                     player.pressed["jump"] = True
@@ -78,7 +83,7 @@ if __name__ == "__main__":
                 elif event.key == K_LSHIFT:
                     #if player.pressed["left"] or player.pressed["right"]:
                     player.pressed["sprint"] = True
-                
+
 
 
             if event.type == KEYUP:
@@ -95,18 +100,21 @@ if __name__ == "__main__":
             if event.type == pg.MOUSEBUTTONDOWN and pg.mouse.get_pressed()[0]:
                 left_click = True
 
+            gui.pressed = False
             if event.type == pg.MOUSEBUTTONUP and left_click:
                     gui.pressed = True
                     left_click = False
 
-            
+
 
 
 
         player.plat_check()
         player.update(v.screen)
         player.draw(v.screen)
-        player.life_check()
+        if isinstance(player.state, sprites.State.Vulnerable) :
+            asyncio.run(player.life_check())
+
         player.life_draw(v.screen)
         platform1.update(player)
         platform1.draw(v.screen)
@@ -116,6 +124,8 @@ if __name__ == "__main__":
         platform3.draw(v.screen)
         platform4.update(player)
         platform4.draw(v.screen)
+        enemy1.update()
+        enemy1.draw(v.screen)
         button.update()
         button.draw(v.screen)
 
@@ -123,4 +133,3 @@ if __name__ == "__main__":
         pg.display.flip()
 
 
-        

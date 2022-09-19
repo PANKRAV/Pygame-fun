@@ -6,6 +6,7 @@ import pygame as pg
 from pygame.locals import *
 import sys
 from functools import cache
+import asyncio
 
 #user defined
 import variables as v
@@ -92,7 +93,7 @@ class Player(Sprite):
         self.lifes = 4
         #state for platform or ground
         self.s = 0
-        self.state = "vulnerable"
+        self.state = State.Vulnerable()
         self.μ = 0.45
         self.plat_relative = [False, "no"]
         
@@ -304,20 +305,27 @@ class Player(Sprite):
 
 
 
-    def life_check(self):
+    async def life_check(self):
         for enemy in v.enemy_data :
             _col = utility.collision(self, enemy)
-            if _col :
+            if _col and isinstance(self.state, State.Vulnerable) :
                 self.lifes -= 1
+                self.state = State.Invulnerable()
+                #await asyncio.sleep(2)
+                self.state = State.Vulnerable()
+
 
         for projectile in v.projectile_data :
             _col = utility.collision(self, projectile)
             if _col :
                 self.lifes -= 1
+                self.state = State.Invulnerable()
+                #await asyncio.sleep(2)
+                self.state = State.Vulnerable()
 
 
         if self.lifes == 0 :
-            pass
+            utility.q()
 
 
 
@@ -334,11 +342,12 @@ class Player(Sprite):
 
 class Enemy(Sprite) :
     enemy_count = 0
+    height = 40
 
-    def __init__(self, pos : tuple|terrain.Platform):
-        super().__init__(pos[0], pos[1], "square", v.RED, 40, 40)
+    def __init__(self, pos : tuple[int]|terrain.Platform):
+        super().__init__(pos[0], pos[1], "square", v.RED, Enemy.height, Enemy.height)
         
-
+        v.enemy_data.append(self)
         Enemy.enemy_count += 1
 
     @property
@@ -363,7 +372,7 @@ class Enemy(Sprite) :
 class Moving_Enemy(Enemy) :
     moving_enemy_count = 0
 
-    def __init__(self, pos : tuple|terrain.Platform, u):
+    def __init__(self, pos : tuple[int]|terrain.Platform, u):
         super().__init__(pos)
         self.u = u
 
@@ -396,5 +405,10 @@ class Projectile(Sprite):
 
 
 class State:
-    def __init__(self):
+    @staticmethod
+    class Invulnerable :
+        ...
+
+    @staticmethod
+    class Vulnerable :
         ...
