@@ -14,7 +14,7 @@ v.acc_list = []
 
 
 class Force:
-    pass
+    ...
 
 
 

@@ -5,6 +5,7 @@ import physics as physics
 import pygame as pg
 from pygame.locals import *
 import sys
+from functools import cache
 
 #user defined
 import variables as v
@@ -196,7 +197,7 @@ class Player(Sprite):
 #-------UPDATE Y---------->        
         self.y += self.uy * v.dt * v.game_speed 
 
-        if self.isground == -1:        
+        if self.isground == -1:
             self.uy += self.ay * v.dt * v.game_speed
 
         elif self.isground == 0:
@@ -206,9 +207,9 @@ class Player(Sprite):
         elif self.isground > 0:
             self.y = v.plat_data[self.isground - 1].y - self.height
             self.uy = 0
-            
-            
-        
+
+
+
 #-------------------------->
         self.plat_check()
         #self.rect = pg.Rect(self.x, self.y, self.width, self.height)
@@ -242,10 +243,10 @@ class Player(Sprite):
         self.ax = acc["accx"]
         self.ay = acc["accy"]
 
-        
 
-            
-        
+
+
+
         if self.isground == 0:
         
             if self.ux > 0:
@@ -256,9 +257,9 @@ class Player(Sprite):
                 if v.object_acceleration and self.pressed["sprint"] and self.pressed["left"]: 
                     self.ax -= self.sprint
 
-        
-        
-        
+
+
+
 
 
 
@@ -288,8 +289,8 @@ class Player(Sprite):
                         elif self.ux < 0 :
                             self.x = self.x0 + 1
 
-                            
-                
+
+
             elif plat.solid and _col :
                 if self.y < plat.y + plat.height - 2:
                     if self.ux > 0:
@@ -326,8 +327,8 @@ class Player(Sprite):
         for i in range(self.lifes) :
             pg.draw.circle(screen, v.RED, (v.width/20 + _, v.height - 40 ), 20)
             _ += 50
-                               
-                    
+
+
 
 
 
@@ -355,9 +356,9 @@ class Enemy(Sprite) :
         self.height = rect.height
 
     def update(self):
-        pass
+        ...
 
-        
+
 
 class Moving_Enemy(Enemy) :
     moving_enemy_count = 0
@@ -376,13 +377,13 @@ class Moving_Enemy(Enemy) :
 
         self.x += self.u * v.dt * v.game_speed
 
-        
+
         if self.x <= 0 or self.x + self.width >= v.width :
             self.u = - self.u
 
 
 class Projectile(Sprite):
-    pass
+    ...
 
 
 
@@ -396,4 +397,4 @@ class Projectile(Sprite):
 
 class State:
     def __init__(self):
-        pass
+        ...

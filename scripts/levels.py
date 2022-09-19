@@ -19,18 +19,18 @@ class Level:
 
 
     def setup(self):
-        pass
+        ...
 
 
     def end(self):
-        pass
+       ...
 
 
     @classmethod
     def load(cls, _json : Path):
-        pass
+        ...
 
 
 
     def json_pack(self, name : str):
-        pass
+        ...

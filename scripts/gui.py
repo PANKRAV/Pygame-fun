@@ -24,7 +24,7 @@ class Button :
         self.rounded = rounded
         self.pressed = False
         self.hasfocus = False
-        
+
 
     @property
     def rect(self) :
@@ -50,7 +50,7 @@ class Button :
     def update(self) :
         x = v.mouse[0] >= self.x and v.mouse[0] <= self.x + self.width       
         y = v.mouse[1] <= self.y + self.height and v.mouse[1] >= self.y
-        
+
 
         if self.pressed :
             self.action()
@@ -60,7 +60,7 @@ class Button :
                 self.hasfocus = True
                 if pressed :
                     self.pressed = True
-            
+
             else:
                 self.hasfocus = False
                 self.focusaction(self.focusactionnum)
@@ -80,7 +80,7 @@ class Button :
 
 
 
-   
+
     def focusaction(self, action = 0):
         if action == 0 :
             if self.hasfocus :
@@ -88,8 +88,8 @@ class Button :
 
             else :
                 self.color = self.old_color
-            
-            
+
+
 
 
 
@@ -122,4 +122,4 @@ class Menu :
     def setup(self) :
         if self.status :
             while True :
-                pass
+                ...

@@ -64,7 +64,7 @@ class Platform(Terrain):
 
     def update(self, player : sprites.Player):
         if player.isground == self.num:
-            pass
+            ...
 
 
 
@@ -77,7 +77,7 @@ class Moving_Platform(Platform):
         self.player_required = player_required
         self.x0 = self.x
         self.y0 = self.y
-        
+
 
         self.u = {"ux" : ux, "uy" : uy}
 
@@ -119,15 +119,15 @@ class Moving_Platform(Platform):
         self.follow_player = follow_player
 
 
-        
-
-
-    
 
 
 
 
-        
+
+
+
+
+
 
 
 
@@ -152,8 +152,8 @@ class Moving_Platform(Platform):
                 if self.axis == "y" or self.axis == "xy":
                     if self.y <= self.travely or self.y + self.height >= v.height - self.travely :
                         self.u["uy"] = - self.u["uy"]
-                
-        
+
+
 
 
         else:
@@ -163,7 +163,7 @@ class Moving_Platform(Platform):
                 if self.x <= self.x0 - self.travelx or self.x + self.width >= self.x0 + self.width + self.travelx :
                     self.u["ux"] = - self.u["ux"]
 
-                    
+
 
 
 
@@ -173,9 +173,9 @@ class Moving_Platform(Platform):
             if self.axis == "y" or self.axis == "xy":
                 if self.y <= self.travely or self.y + self.height >= v.height - self.travely :
                     self.u["uy"] = - self.u["uy"]
-            
 
-        
+
+
         #self.rect = pg.Rect(self.x, self.y, self.width, self.height)
 
 
@@ -201,7 +201,7 @@ class Wall(Terrain):
 
 class Sticky_Wall(Wall):
     def __init__(self):
-        pass
+        ...
 
 
 
