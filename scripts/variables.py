@@ -35,6 +35,9 @@ ground_height = 100
 #PATHS
 images = None
 sounds = None
+cwd = pathlib.Path.cwd()
+start_dir = pathlib.Path.cwd()
+home_dir = pathlib.Path.home()
 
 #DATA
 acc_list = []
