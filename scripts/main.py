@@ -112,8 +112,7 @@ if __name__ == "__main__":
         player.plat_check()
         player.update(v.screen)
         player.draw(v.screen)
-        if isinstance(player.state, sprites.State.Vulnerable) :
-            asyncio.run(player.life_check())
+        player.life_check()
 
         player.life_draw(v.screen)
         platform1.update(player)

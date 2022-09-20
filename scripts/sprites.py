@@ -7,6 +7,7 @@ from pygame.locals import *
 import sys
 from functools import cache
 import asyncio
+import time
 
 #user defined
 import variables as v
@@ -305,22 +306,29 @@ class Player(Sprite):
 
 
 
-    async def life_check(self):
+    def life_check(self):
         for enemy in v.enemy_data :
             _col = utility.collision(self, enemy)
             if _col and isinstance(self.state, State.Vulnerable) :
                 self.lifes -= 1
-                self.state = State.Invulnerable()
-                #await asyncio.sleep(2)
-                self.state = State.Vulnerable()
+                self.state = State.Invulnerable()               
+                State.timer = time.time()
 
+
+        _col = None
 
         for projectile in v.projectile_data :
             _col = utility.collision(self, projectile)
-            if _col :
+            if _col and isinstance(self.state, State.Vulnerable):
                 self.lifes -= 1
                 self.state = State.Invulnerable()
-                #await asyncio.sleep(2)
+                State.timer = time.time()
+
+        
+
+        if isinstance(self.state, State.Invulnerable) :
+            print(time.time() - State.timer)
+            if time.time() - State.timer >= 2 :
                 self.state = State.Vulnerable()
 
 
@@ -405,6 +413,7 @@ class Projectile(Sprite):
 
 
 class State:
+    timer = 0
     @staticmethod
     class Invulnerable :
         ...
