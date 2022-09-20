@@ -233,4 +233,24 @@ class Slope(Terrain):
 
 
 class Goal:
-    ...
+    def __init__(self, pos : tuple[int, 2], width : int, color) -> None:
+        self.x = pos[0]
+        self.y = pos[1]
+        self.width = width
+        self.color = color
+
+
+
+    @property
+    def rect(self) :
+        return pg.Rect(self.x, self.y, self.width, self.width)
+
+
+
+
+    @rect.setter
+    def rect(self, rect : pg.Rect) :
+        self.x = rect.left
+        self.y = rect.top
+        self.width = rect.width
+        

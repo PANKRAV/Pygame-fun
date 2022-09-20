@@ -113,18 +113,25 @@ if __name__ == "__main__":
         player.update(v.screen)
         player.draw(v.screen)
         player.life_check()
-
         player.life_draw(v.screen)
+        player.goal_check()
+
+
         platform1.update(player)
         platform1.draw(v.screen)
+
         platform2.update(player)
         platform2.draw(v.screen)
+
         platform3.update(player)
         platform3.draw(v.screen)
+
         platform4.update(player)
         platform4.draw(v.screen)
+
         enemy1.update()
         enemy1.draw(v.screen)
+        
         button.update()
         button.draw(v.screen)
 

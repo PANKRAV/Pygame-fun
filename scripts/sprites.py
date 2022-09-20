@@ -347,6 +347,11 @@ class Player(Sprite):
 
 
 
+    def goal_check(self, goal : terrain.Goal) :
+        if utility.collision(self, goal) :
+            return True
+
+
 
 class Enemy(Sprite) :
     enemy_count = 0
