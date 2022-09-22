@@ -114,7 +114,7 @@ if __name__ == "__main__":
         player.draw(v.screen)
         player.life_check()
         player.life_draw(v.screen)
-        player.goal_check()
+        #player.goal_check(None)
 
 
         platform1.update(player)
